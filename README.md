@@ -70,7 +70,7 @@ Probe with `GET /v1/models` every few minutes. Switch on 401, timeout, or an emp
 
 ## Health probe
 
-`healthcheck.py` polls `/v1/models` every 5 minutes across both endpoints, prints which one is live, and never sends a paid chat request. Fill `API_KEYS` if your endpoint requires auth; leave blank to test public reachability only.
+`healthcheck.py` polls `/v1/models` every 5 minutes across both endpoints, prints which one is live, and never sends a paid chat request. Fill `API_KEYS` first — `/v1/models` requires auth on most endpoints, so leaving them blank returns 401 everywhere.
 
     python healthcheck.py
 

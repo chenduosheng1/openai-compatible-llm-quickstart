@@ -14,7 +14,7 @@ ENDPOINTS = [
     "https://5pcloud.top/v1",
 ]
 API_KEYS = {
-    # 每个端点填自己的 key。没有就留空，只测公开可达性。
+    # 每个端点填自己的 key。/v1/models 需要鉴权，留空会一律 401。
     "https://api.deepseek.com/v1": "",
     "https://5pcloud.top/v1": "",
 }
