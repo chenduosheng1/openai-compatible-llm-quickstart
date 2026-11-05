@@ -68,6 +68,12 @@ raise RuntimeError("all endpoints down")
 
 Probe with `GET /v1/models` every few minutes. Switch on 401, timeout, or an empty model list.
 
+## Health probe
+
+`healthcheck.py` polls `/v1/models` every 5 minutes across both endpoints, prints which one is live, and never sends a paid chat request. Fill `API_KEYS` if your endpoint requires auth; leave blank to test public reachability only.
+
+    python healthcheck.py
+
 ## Gotchas
 
 - `base_url` needs `/v1`. A bare host gives 404 and looks exactly like a bad key.
