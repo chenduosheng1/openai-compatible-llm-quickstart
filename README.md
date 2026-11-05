@@ -68,6 +68,10 @@ raise RuntimeError("all endpoints down")
 
 Probe with `GET /v1/models` every few minutes. Switch on 401, timeout, or an empty model list.
 
+## Copy-paste examples
+
+[`examples/`](examples/) has four standalone files: `01_minimal.py`, `02_stream_guard.py` (the finish_reason check), `03_fallback.py` (two-endpoint switching), `04_curl.sh`. Each runs on its own, no framework.
+
 ## Health probe
 
 `healthcheck.py` polls `/v1/models` every 5 minutes across both endpoints, prints which one is live, and never sends a paid chat request. Fill `API_KEYS` first — `/v1/models` requires auth on most endpoints, so leaving them blank returns 401 everywhere.
