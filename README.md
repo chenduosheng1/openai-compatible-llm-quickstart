@@ -74,6 +74,8 @@ Probe with `GET /v1/models` every few minutes. Switch on 401, timeout, or an emp
 
     python healthcheck.py
 
+Hit a weird one? See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) — the six errors that look like other errors.
+
 ## Gotchas
 
 - `base_url` needs `/v1`. A bare host gives 404 and looks exactly like a bad key.
