@@ -1,0 +1,64 @@
+{
+  "name": "Ara API 站点监控+公告",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {"interval": [{"field": "hours", "hoursInterval": 6}]}
+      },
+      "name": "每6小时",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "url": "https://5pcloud.top/api/status",
+        "options": {}
+      },
+      "name": "站点状态",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {"caseSensitive": true, "version": 2},
+          "conditions": [
+            {"leftValue": "={{ $json.data?.version || 'ok' }}", "rightValue": "", "operator": {"type": "string", "operation": "notEmpty"}}
+          ]
+        },
+        "options": {}
+      },
+      "name": "站点健康?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "functionCode": "return [{json: {ok: true, time: new Date().toISOString(), site: '5pcloud.top', note: 'Ara API 运行正常'}}];"
+      },
+      "name": "正常",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [660, -100]
+    },
+    {
+      "parameters": {
+        "functionCode": "return [{json: {alert: true, time: new Date().toISOString(), site: '5pcloud.top', note: 'Ara API 异常! 立即检查'}}];"
+      },
+      "name": "异常",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [660, 100]
+    }
+  ],
+  "connections": {
+    "每6小时": {"main": [[{"node": "站点状态", "type": "main", "index": 0}]]},
+    "站点状态": {"main": [[{"node": "站点健康?", "type": "main", "index": 0}]]},
+    "站点健康?": {"main": [[{"node": "正常", "type": "main", "index": 0}], [{"node": "异常", "type": "main", "index": 0}]]}
+  },
+  "active": false,
+  "settings": {}
+}
