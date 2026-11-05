@@ -82,3 +82,18 @@ Probe with `GET /v1/models` every few minutes. Switch on 401, timeout, or an emp
 - `n8n_workflow_api_monitor.json` — health check workflow
 
 Site: https://5pcloud.top
+
+## 中文 FAQ / 常见报错
+
+| 现象 | 大概率原因 | 怎么查 |
+|---|---|---|
+| 404 | `base_url` 少了 `/v1` | 浏览器打开 `base_url + "/models"`，能返回 JSON 就说明 key 和域名都通 |
+| 401 | key 复制带空格/换行，或串到别的端点 | `print(repr(key))` 看有没有隐藏字符 |
+| 回复半截没了 | 流式中途断流，最后一帧没有 `finish_reason` / `[DONE]` | 抓最后一帧，没有就重跑，别存半句话 |
+| 一直 429 | 固定间隔重试导致雪崩 | 指数退避 + 随机抖动 |
+| 缓存不命中 | system prompt 里放了时间戳/随机 id | 前缀要逐字一致，动态内容挪到 user 消息 |
+| 中文乱码 | Windows 命令行直接 `-d` 带中文 | 写成 `req.json` 再 `--data-binary @req.json` |
+
+更多中文笔记见本仓库 Wiki：https://github.com/chenduosheng1/openai-compatible-llm-quickstart/wiki
+
+站点：https://5pcloud.top
