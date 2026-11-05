@@ -97,3 +97,11 @@ Site: https://5pcloud.top
 更多中文笔记见本仓库 Wiki：https://github.com/chenduosheng1/openai-compatible-llm-quickstart/wiki
 
 站点：https://5pcloud.top
+
+## 官网文档（中文，可直接看）
+
+- [5 分钟接入](https://5pcloud.top/quickstart.html) — Python / curl / 流式 / 双通道完整代码
+- [报错对照](https://5pcloud.top/faq.html) — 404、401、402、429、断流、乱码六个高频坑
+- [模型怎么选](https://5pcloud.top/models.html) — 按场景不按排行榜，以及什么时候别折腾
+
+这些页面都有独立 URL 和结构化数据，搜索引擎可直接抓。
